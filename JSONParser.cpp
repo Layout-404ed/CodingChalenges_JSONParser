@@ -32,7 +32,7 @@ bool parse(std::fstream& file){
 }
 
 bool parse(std::fstream& file){
-    if(step1){
+    if(step1(file) && step2(file)){
         return true;
     }else{
         return false;
@@ -41,12 +41,13 @@ bool parse(std::fstream& file){
 
 bool step1(std::fstream& file){
     // step 1
+    file.seekg(0); // return reading to 0
+
     char f, l; // first and last char
     std::string line = ""; // temp line var
     
     // first char of file
-    getline(file, line);
-    f = line[0];
+    file.get(f);
 
     while(getline(file, line)) // ignore everything else
     {}
@@ -59,6 +60,10 @@ bool step1(std::fstream& file){
     }else{
         return false;
     }
+}
+
+bool step2(std::fstream& file){
+    // consume first char like u did in step 1
 }
 
 // main method
